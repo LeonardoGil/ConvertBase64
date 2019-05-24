@@ -20,7 +20,7 @@ namespace ConvertBase64
                 Console.WriteLine($"Diretorio {diretorio} encontrado.");
                 foreach (var arquivo in Repository.GetArquivosDiretorio(diretorio))
                 {
-                    Console.WriteLine($"Arquivo: {arquivo}");
+                    Console.WriteLine($"arquivo: {arquivo}");
                     Repository.ConverterArquivoParBase64(arquivo);
 
                     Console.WriteLine($"##############################################################################################");
@@ -32,5 +32,6 @@ namespace ConvertBase64
             Console.WriteLine($"Finish");
             Console.ReadKey();
         }
+
     }
 }

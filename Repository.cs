@@ -49,7 +49,7 @@ namespace ConvertBase64
                     return;
                 }    
                 else
-                    File.AppendAllText(arquivo, conteudoConvertido);
+                    File.AppendAllText(arquivo, conteudoConvertido);                
 
                 Console.WriteLine($"Arquivo {arquivo} Criado com sucesso.");
             }
@@ -57,6 +57,8 @@ namespace ConvertBase64
             {
                 Console.WriteLine(ex.Message);
             }
+
+
         }
     }
 }
