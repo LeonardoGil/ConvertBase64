@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.IO.Compression;
 
 namespace ConvertBase64
 {
@@ -28,6 +29,17 @@ namespace ConvertBase64
             return conteudo;
         }
 
+        public static void LerArquivosInZip(string path)
+        {
+            using (ZipArchive arquivos = ZipFile.OpenRead(path))
+            {
+                foreach (var arquivo in arquivos.Entries)
+                {
+                    Console.WriteLine(arquivo.FullName);
+                }
+            }
+        }
+
         public static void ConverterArquivoParBase64(string nomearquivo)
         {
             var conteudo = GetBytesArquivo(nomearquivo);
@@ -42,7 +54,7 @@ namespace ConvertBase64
             {
                 string conteudoConvertido = Convert.ToBase64String(conteudo);
                 var arquivo = string.Concat(nomearquivo.Replace(".txt", string.Empty), "Base64.txt");
-
+    
                 if (File.Exists(arquivo))
                 {
                     Console.WriteLine($"Arquivo ja existe");
@@ -59,4 +71,5 @@ namespace ConvertBase64
             }
         }
     }
+
 }

@@ -1,5 +1,8 @@
-﻿using System;
+﻿using ConvertBase64.Teste;
+using System;
 using System.Collections.Generic;
+using System.IO;
+using System.IO.Compression;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,27 +13,7 @@ namespace ConvertBase64
     {
         static void Main(string[] args)
         {
-            string diretorio = string.Empty;
-
-            Console.Write($"Informe um Diretorio: ");
-            diretorio = Console.ReadLine();
-
-            if (Repository.ExisteDiretorio(diretorio))
-            {
-                Console.WriteLine($"Diretorio {diretorio} encontrado.");
-                foreach (var arquivo in Repository.GetArquivosDiretorio(diretorio))
-                {
-                    Console.WriteLine($"Arquivo: {arquivo}");
-                    Repository.ConverterArquivoParBase64(arquivo);
-
-                    Console.WriteLine($"##############################################################################################");
-                }
-            }
-            else
-                Console.WriteLine($"Diretorio {diretorio} não existe.");
-
-            Console.WriteLine($"Finish");
-            Console.ReadKey();
+            Teste2 tst = new Teste2();
         }
     }
 }
