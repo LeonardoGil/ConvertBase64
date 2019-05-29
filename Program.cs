@@ -13,7 +13,7 @@ namespace ConvertBase64
     {
         static void Main(string[] args)
         {
-            Teste2 tst = new Teste2();
+            Teste2 ts = new Teste2();
         }
     }
 }

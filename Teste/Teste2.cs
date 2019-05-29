@@ -17,13 +17,11 @@ namespace ConvertBase64.Teste
             Console.Write($"Informe um Diretorio: ");
             diretorio = Console.ReadLine();
 
-            AbrirArquivo(diretorio);
+            AbrirArquivoZIP(diretorio);
             Console.ReadKey();
         }
 
-
-
-        public string ObterArquivoDecodificado(ZipArchiveEntry arquivo)
+        public List<string> ObterArquivoDecodificado(ZipArchiveEntry arquivo)
         {
             string conteudo;
             byte[] conteudobase64;
@@ -44,54 +42,71 @@ namespace ConvertBase64.Teste
             }
             catch (Exception)
             {
-
                 throw;
             }
-            return conteudo;
+            return conteudo.Split('\n').ToList();
         }
-        public void DefinirTipoArquivo(ZipArchiveEntry arquivo)
+        public void DefinirTratarArquivoTxt(ZipArchiveEntry arquivo)
         {
-            string conteudo = ObterArquivoDecodificado(arquivo);
-            switch (arquivo.Name.Replace("Base64.txt", string.Empty))
+            List<string> conteudo = ObterArquivoDecodificado(arquivo);
+
+            foreach (var linha in conteudo)
             {
-                case "cliente":
-                    break;
-                case "bairro": 
-                    break;
-                case "cidade":
-                    break;
-                case "produtoacumulado":
-                    break;
-                case "unificacao":
-                    break;
-                case "vendaacumulada":
-                    break;
-                case "visitador":
-                    break;
-                default:
-                    break;
+                string[] aux = linha.Split('|');
+                switch (arquivo.Name.Replace("Base64.txt", string.Empty))
+                {
+                    case "cliente":
+                        CriarClienteDto(aux);
+                        break;
+                    case "bairro":
+                        CriarBairroDto(aux);
+                        break;
+                    case "cidade":
+                        break;
+                    case "produtoacumulado":
+                        break;
+                    case "unificacao":
+                        break;
+                    case "vendaacumulada":
+                        break;
+                    case "visitador":
+                        break;
+                    default:
+                        break;
+                }
             }
+
         }
-        public void CriarBairroDto(string conteudo)
+
+
+        public void CriarBairroDto(string[] bairro)
         {
             BairroDto bairrodto = new BairroDto();
 
-            
-                   
+            bairrodto.Id = int.Parse(bairro[0]);
+            bairrodto.Nome = bairro[1];
+
+            Console.WriteLine(bairrodto.ToString());
         }
 
-        public void TratarConteudoBairro(string conteudo)
+        public void CriarClienteDto(string[] cliente)
         {
-            string[] linhas = conteudo.Split('|');
+            ClienteDto clientedto = new ClienteDto();
 
-            for (int j = 0; j < linhas.Count(); j++)
-            {
+            clientedto.Id = int.Parse(cliente[0]);
 
-            }
+        }
+
+        public void CriarCidadeDto(string[] cidade)
+        {
+            ClienteDto clientedto = new ClienteDto();
+
+            clientedto.Id = int.Parse(cliente[0]);
+
         }
 
 
-        public void AbrirArquivo(string path)
+        public void AbrirArquivoZIP(string path)
         {
             try
             {
@@ -103,7 +118,7 @@ namespace ConvertBase64.Teste
                         {
                             Console.WriteLine($"Arquivo {arquivo.FullName}");
                             if (arquivo.FullName.EndsWith(".txt"))
-                                DefinirTipoArquivo(arquivo);
+                                DefinirTratarArquivoTxt(arquivo);
                         }
                     }
                 }

@@ -1,8 +1,7 @@
 ﻿namespace ConvertBase64.dtos
 {
-    public class BairroDto
+    public class BairroDto : BaseDto
     {
-        public int Id { get; set; }
-        public string Nome { get; set; }
+        public string NomeBairro { get; set; }
     }
 }
